@@ -1,0 +1,4 @@
+interface Window {
+    onSceneLoaded: any
+}
+

@@ -1,0 +1,42 @@
+<krpano version="1.20" showerrors="true" debugmode="true">
+<!-- 皮肤全局设置 -->
+<skin_settings
+	loading="场景加载中"
+	littleplanetintro="true"
+	webvr="true"
+	bgmusic="false"
+	gyro="false"
+	scene_infos="true"
+	navmap="true"
+	title="true"
+	loadscene_flags="MERGE"
+	loadscene_blend="BLEND(1.0, easeInCubic)"
+	layout_width="100%"
+	layout_bgcolor="0x000000"
+	layout_bgalpha="0.3"
+	layout_bgborder="0"
+	layout_bgroundedge="0"
+	layout_bgshadow="0 4 10 0x000000 0.3"
+	controlbar_offset="40"/>
+<!-- 全局属性 Skin Events -->
+<action name="startup" >
+	if(startscene === null OR !scene[get(startscene)], copy(startscene,scene[0].name); );
+	loadscene(get(startscene), null, MERGE);
+	if(startactions !== null, startactions() );
+</action>
+<action name="Move">
+		trace(%1,'/',%2,'/',%3,'/',%4);
+		<!-- (scene-name，ath，atv，fov); -->
+		loadscene(%1, null,MERGE,BLEND(1)); lookat(%2,%3,%4);
+		set('view.hlookat',%2);
+		set('view.vlookat',%3);
+		set('view.fov',%4);
+	</action>
+
+	<action name="MoveToScene">
+		loadscene(%1, null,MERGE,BLEND(1));
+		trace(get(view.hlookat),get(view.vlookat),get(view.fov));
+		lookat(get(view.hlookat),get(view.vlookat),get(view.fov));
+	</action>
+
+</krpano>
